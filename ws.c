@@ -43,24 +43,32 @@ int main(int argc, char *argv[])
 			case 'r':
 				//Flag for reverse order
 				//Test for repeat cases
+				break;
 			case 'n':
 				//Flag for sort by numeric value
+				break;
 			case 'l':
 				//Flag for sort by length
+				break;
 			case 's':
 				//Flag for sort by scrabble score
+				break;
 			case 'a':
 				//Flag for sorting words lexicographically (The default)
 				//Flag is still here despite being default
 				//Because user may want to sort with a -a afterwards
+				break;
 			case 'u':
 				//Flag for not printing out duplicates
 				//Probably going to be a flag affecting print so needs it's own flag
+				break;
 			case 'h':
 				//Prints out help options
+				break;
 			case 'p':
 				//florish
 				//Flag for striping out non-alphanumeric characters from end of words
+				break;
 			case '?':
 				return EX_USAGE;
 			default:
