@@ -92,11 +92,7 @@ int main(int argc, char *argv[])
 		}
 		printf("Now running sort_word_array function\n");
 		word_array = sort_word_array(word_array, flag_str, index);
-		for(int i = 0; i < index; ++i){
-			printf("%s\n", word_array[i]);
-			free(word_array[i]);
-		}
-		free(word_array);
+
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
 	printf("%s \n", flag_str);
@@ -170,4 +166,22 @@ char **file_read(char **word_array, FILE *fp, int *index)
 		}
 	}
 	return word_array;	
+}
+
+void print_words(char **word_array, int index, bool reverse_print)
+{	
+	if(!reverse_print) {
+		for(int i = 0; i < index; ++i){
+			printf("%s\n", word_array[i]);
+			free(word_array[i]);
+		}
+
+	} else {
+		for(int i = index; i > 0; --i){
+			printf("%s\n", word_array[i-1]);
+			free(word_array[i-1]);
+		}
+	}
+	
+	free(word_array);
 }
