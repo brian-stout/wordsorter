@@ -79,10 +79,12 @@ int main(int argc, char *argv[])
 			FILE *fp = fopen(argv[i], "r");
 			word_array = file_read(word_array, fp, &index);
 			fclose(fp);
-			for(int i = 0; i < index; ++i){
-				printf("%s\n", word_array[i]);
-			}
 		}
+		for(int i = 0; i < index; ++i){
+			printf("%s\n", word_array[i]);
+			free(word_array[i]);
+		}
+		free(word_array);
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
 	printf("%s \n", flag_str);
