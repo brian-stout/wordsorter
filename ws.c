@@ -78,10 +78,9 @@ int main(int argc, char *argv[])
 			printf("DEBUG: File to be opened: %s \n", argv[i]);
 			FILE *fp = fopen(argv[i], "r");
 			word_array = file_read(word_array, fp, &index);
-			printf("%d\n", index);
+			fclose(fp);
 			for(int i = 0; i < index; ++i){
 				printf("%s\n", word_array[i]);
-				free(word_array[i]);
 			}
 		}
 	}
