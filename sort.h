@@ -8,7 +8,7 @@ int l_sort(const void *, const void *);
 
 void n_sort(void);
 
-void r_sort(void);
+char **r_sort(char **word_array, int index);
 
 void s_sort(void);
 
@@ -62,17 +62,9 @@ void n_sort(void)
 	printf("Running the n sort function\n");
 }
 
-char **r_sort(char **word_array, int index)
+int r_sort(int i)
 {
-	char *temp_buf;
-	for(int i = 0; i < index; ++i{
-		//strncpy(temp_buf, word_array[index], strlen(word_array[index] + 1);
-		*temp_buf = word_array[index];
-		word_array[index] = word_array[i];
-		word_array[i] = temp_buf;
-		--index;	
-	}
-	return word_array;
+	return i*-1;
 }
 
 void s_sort(void)
