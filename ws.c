@@ -78,6 +78,12 @@ int main(int argc, char *argv[])
 			printf("DEBUG: File to be opened: %s \n", argv[i]);
 			FILE *fp = fopen(argv[i], "r");
 			index = file_read(word_array, fp, index);
+			for(int i = 0; i < index; ++i){
+				printf("%s\n", word_array[i]);
+				free(word_array[i]);
+			}
+			fclose(fp);
+			free(word_array);
 		}
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
@@ -126,11 +132,11 @@ bool argument_checker(int argc, char *argv[])
 
 int file_read(char **word_array, FILE *fp, int index)
 {
-	buf[128];
+	char buf[128];
 	char *tmp;
 	char *token;
 
-	while(fgets(buf, sizeof(buf), fp1)) {
+	while(fgets(buf, sizeof(buf), fp)) {
 		token = strtok(buf, " \n\t");
 		word_array = realloc(word_array, (1 + index) * sizeof(*word_array));
 		tmp = malloc(strlen(token) + 1);
