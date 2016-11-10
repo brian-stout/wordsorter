@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 		printf("Now running sort_word_array function\n");
 		word_array = sort_word_array(word_array, flag_str, index);
 		for(int i = 0; i < index; ++i){
-			//printf("%s\n", word_array[i]);
+			printf("%s\n", word_array[i]);
 			free(word_array[i]);
 		}
 		free(word_array);

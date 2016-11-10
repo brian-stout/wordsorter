@@ -2,7 +2,7 @@
 
 char **sort_word_array(char **, char *, int);
 
-void a_sort(void);
+int a_sort(const void *, const void *);
 
 void l_sort(void);
 
@@ -24,7 +24,7 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 		//DEBUG: Case statements for the a l n r s flags
 		switch(c) {
 			case 'a':
-				a_sort();
+				qsort(word_array, index, sizeof(*word_array), a_sort);
 				break;
 			case 'l':
 				l_sort();
@@ -46,12 +46,12 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 
 	return word_array;	
 }
-
-void a_sort(void)
+//Alphabetically
+int a_sort(const void *a, const void *b)
 {
-	printf("Running the a sort function\n");
+	return strcmp(*(const char **)a, *(const char **)b);
 }
-
+//Length
 void l_sort(void)
 {
 	printf("Running the l sort function\n");
