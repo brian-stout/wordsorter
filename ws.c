@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 		printf("Now running sort_word_array function\n");
 		word_array = sort_word_array(word_array, flag_str, index);
 		for(int i = 0; i < index; ++i){
-			printf("%s\n", word_array[i]);
+			//printf("%s\n", word_array[i]);
 			free(word_array[i]);
 		}
 		free(word_array);
@@ -166,10 +166,10 @@ char **file_read(char **word_array, FILE *fp, int *index)
 
 char **sort_word_array(char **word_array, char *flag_str, int index)
 {
-	printf("%d\n", index);
-	printf("%s\n", flag_str);
-	for(int i = 0; i < index; ++i){
-		word_array[i][0] = 'Z';
+	size_t num_of_sorts = strlen(flag_str);
+	//Starting at end of array so the flags are run in reverse order
+	for(size_t i = num_of_sorts; i > 0; --i){
+		printf("Running %c sort right now\n", flag_str[i-1]);
 	}
 
 	return word_array;	
