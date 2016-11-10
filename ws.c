@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	//The flag_ind will always be the last value in the str which should be a null byte
 	//It's initially set to 0 so the default value gets overwritten
 	int flag_ind = 0;
-
+	//TODO: The string is unnesscary, just overwite the character each time
 	//Memory for two characters, the default value and a null byte
 	char *flag_str = malloc(2);
 	flag_str[0] = 'a';
