@@ -9,8 +9,6 @@
 
 #include "sort.h"
 
-int flag_append(char [], char, int);
-
 bool argument_checker(int argc, char *argv[]);
 
 char **file_read(char **, FILE *, int *);
@@ -30,9 +28,7 @@ int main(int argc, char *argv[])
 	int flag_ind = 0;
 	//TODO: The string is unnesscary, just overwite the character each time
 	//Memory for two characters, the default value and a null byte
-	char *flag_str = malloc(2);
-	flag_str[0] = 'a';
-	flag_str[1] = '\0';
+	char sort_flag = 'a';
 
 	bool unique_words_only = false;
 	bool non_alphanum_strip = false;
@@ -73,8 +69,7 @@ int main(int argc, char *argv[])
 			case '?':
 				return EX_USAGE;
 			default:
-				flag_ind = flag_append(flag_str, c, flag_ind);
-				flag_str = realloc(flag_str, flag_ind + 2);
+				sort_flag = c;
 				break;
 		}
 
@@ -94,22 +89,12 @@ int main(int argc, char *argv[])
 			fclose(fp);
 		}
 	}
-	printf("DEBUG: The flag_str is %s\n", flag_str);
+	printf("DEBUG: The sort_flag is %s\n", sort_flag);
 	printf("DEBUG: The reverse_print is %d\n", reverse_print);
-	word_array = sort_word_array(word_array, flag_str, index);
-	printf("%s \n", flag_str);
+	word_array = sort_word_array(word_array, sort_flag, index);
+	printf("%s \n", sort_flag);
 	print_words(word_array, index, reverse_print);
 	
-	//TODO: Put in more relevant location
-	free(flag_str);
-}
-
-int flag_append(char str[], char flag, int ind)
-{
-	str[ind] = flag;
-	++ind;
-	str[ind] = '\0';
-	return ind;
 }
 
 bool argument_checker(int argc, char *argv[])
