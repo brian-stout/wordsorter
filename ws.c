@@ -7,7 +7,7 @@
 #include <sysexits.h>
 #include <unistd.h>
 
-int flag_append(char *, char);
+size_t flag_append(char [], char, size_t);
 
 int main(int argc, char *argv[])
 {
@@ -17,9 +17,7 @@ int main(int argc, char *argv[])
 	char sort_flag_str[32];
 
 	//TODO: Put this in append flag function
-	sort_flag_str[flag_ind] = 'a';
-	sort_flag_str[flag_ind + 1] = '\0';
-
+	flag_ind = flag_append(sort_flag_str, 'a', flag_ind);
 
 	bool unique_words_only = false;
 	bool non_alphanum_strip = false;
@@ -68,6 +66,7 @@ int main(int argc, char *argv[])
 				//Flag for sorting words lexicographically (The default)
 				//Flag is still here despite being default
 				//Because user may want to sort with a -a afterwards
+			flag_ind = flag_append(sort_flag_str, 'a', flag_ind);
 				break;
 			case 'u':
 				//Flag for not printing out duplicates
@@ -90,9 +89,14 @@ int main(int argc, char *argv[])
 
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
+	printf("DEBUG: The flag string is now %s \n", sort_flag_str);
 		
 }
 
-int flag_append(char *sort_flag_str, char flag){
-
+size_t flag_append(char str[], char flag, size_t ind)
+{
+	str[ind] = flag;
+	++ind;
+	str[ind] = '\0';
+	return ind;
 }
