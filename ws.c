@@ -11,6 +11,8 @@ int flag_append(char [], char, int);
 
 bool argument_checker(int argc, char *argv[]);
 
+int file_read(char **, FILE *, int);
+
 int main(int argc, char *argv[])
 {
 	if(argument_checker(argc, argv)) {
@@ -115,4 +117,8 @@ bool argument_checker(int argc, char *argv[])
 		}
 	}
 	return r;
+}
+
+int file_read(char **word_array, FILE *fp, int index){
+
 }
