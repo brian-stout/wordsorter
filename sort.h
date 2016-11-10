@@ -24,7 +24,20 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 		//DEBUG: Case statements for the a l n r s flags
 		switch(c) {
 			case 'a':
-				
+				a_sort();
+				break;
+			case 'l':
+				l_sort();
+				break;
+			case 'n':
+				n_sort();
+				break;
+			case 'r':
+				r_sort();
+				break;
+			case 's':
+				s_sort();
+				break;
 			default:
 				printf("DEBUG: Running the %c argument now! \n", c);
 				break;
