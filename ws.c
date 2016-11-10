@@ -79,6 +79,8 @@ int main(int argc, char *argv[])
 	} else {
 		for(int i = optind; i < argc; ++i) {
 			printf("DEBUG: File to be opened: %s \n", argv[i]);
+			FILE *fp = fopen(argv[i], "r");
+			index = file_read(word_array, fp, index);
 		}
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
@@ -127,5 +129,5 @@ bool argument_checker(int argc, char *argv[])
 
 int file_read(char **word_array, FILE *fp, int index)
 {
-		
+	return index;	
 }
