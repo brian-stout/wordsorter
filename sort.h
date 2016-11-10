@@ -2,6 +2,16 @@
 
 char **sort_word_array(char **, char *, int);
 
+void a_sort(void);
+
+void l_sort(void);
+
+void n_sort(void);
+
+void r_sort(void);
+
+void s_sort(void);
+
 char **sort_word_array(char **word_array, char *flag_str, int index)
 {
 	size_t num_of_sorts = strlen(flag_str);
@@ -13,7 +23,8 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 		c = flag_str[i-1];
 		//DEBUG: Case statements for the a l n r s flags
 		switch(c) {
-			case
+			case 'a':
+				
 			default:
 				printf("DEBUG: Running the %c argument now! \n", c);
 				break;
@@ -23,6 +34,30 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 	return word_array;	
 }
 
+void a_sort(void)
+{
+	printf("Running the a sort function\n");
+}
+
+void l_sort(void)
+{
+	printf("Running the l sort function\n");
+}
+
+void n_sort(void)
+{
+	printf("Running the n sort function\n");
+}
+
+void r_sort(void)
+{
+	printf("Running the r sort function\n");
+}
+
+void s_sort(void)
+{
+	printf("Running the s sort function\n");
+}
 
 
 
