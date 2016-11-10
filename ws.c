@@ -113,19 +113,22 @@ int flag_append(char str[], char flag, int ind)
 bool argument_checker(int argc, char *argv[])
 {
 	bool r = false;
-
+	
 	for(int i = 0; i < argc; ++i) {
 		if(argv[i][0] == '-') {
+			//Checks to see if a tack option is followed by a space
 			if(argv[i][1] == ' ' || argv[i][1] == '\0') {
 				printf("Usage: [-rnlsauhp] [-c <word limit>] *[files]\n");
 				r = true;
 			}
-			else if(argv[1][1] != '-') {
+			//Checks to see if non option arguments exist before the options
+			else if(argv[1][0] != '-') {
 				printf("Usage: [-rnlsauhp] [-c <word limit>] *[files]\n");
+				r = true;
 			}
 		}
 	}
-
+	//Checks for -h option so it can display the help message
 	for(int i = 1; i < argc; ++i) {
 		if((strncmp(argv[i], "-h", 2) == 0)) {
 			//TODO: write an actual help message, put it in a function to save space
