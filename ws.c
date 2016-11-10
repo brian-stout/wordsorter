@@ -7,7 +7,7 @@
 #include <sysexits.h>
 #include <unistd.h>
 
-size_t flag_append(char [], char, size_t);
+int flag_append(char [], char, int);
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	
 	//The flag_ind will always be the last value in the str which should be a null byte
 	//It's initially set to 0 so the default value gets overwritten
-	size_t flag_ind = 0;
+	int flag_ind = 0;
 
 	//Memory for two characters, the default value and a null byte
 	char *flag_str = malloc(2);
@@ -36,8 +36,6 @@ int main(int argc, char *argv[])
 	}
 	while(-1 < (c = getopt(argc, argv, "c:rnlsauhp"))) {
 		char *err;
-		printf("%c ", c);
-		printf("\n");
 
 		switch(c) {
 			case 'c':
@@ -97,19 +95,13 @@ int main(int argc, char *argv[])
 	free(flag_str);
 }
 
-size_t flag_append(char str[], char flag, size_t ind)
+int flag_append(char str[], char flag, int ind)
 {
-	str[ind] = flag;
 	//The length of the string plus one for the null byte
-	str = realloc(str, (strlen(str) + 1));
+	str[ind] = flag;
+	++ind;
+	str = realloc(str, ind);
+	str[ind] = '\0';
+	return ind;
 
-	//Error handles if realloc fails
-	if(!str) {
-		return -1;
-	}
-	else {
-		++ind;
-		str[ind] = '\0';
-		return ind;
-	}
 }
