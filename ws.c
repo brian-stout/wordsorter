@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 	bool non_alphanum_strip = false;
 
 	int c;
-
 	for(int i = 1; i < argc; ++i) {
 		if((strncmp(argv[i], "-h", 2) == 0)) {
 			//TODO: write an actual help message, put it in a function to save space
@@ -91,6 +90,11 @@ int main(int argc, char *argv[])
 				printf("DEBUG: I don't know how you got here \n");
 		}
 
+	}
+	
+	if(optind == argc) {
+		//TODO: Remove debug line
+		printf("DEBUG: User did not input files \n");
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
 	
