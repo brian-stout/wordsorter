@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <sysexits.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[])
@@ -25,8 +26,9 @@ int main(int argc, char *argv[])
 	}
 	while(-1 < (c = getopt(argc,argv, "c:rnlsauhp"))) {
 		char *err;
-		printf("%c\n", c);
-/*
+		printf("%c ", c);
+		printf("\n");
+
 		switch(c) {
 			case 'c':
 				//strtol value to print_limiter
@@ -51,9 +53,12 @@ int main(int argc, char *argv[])
 			case 'p':
 				//florish
 				//Flag for striping out non-alphanumeric characters from end of words
-
+			case '?':
+				return EX_USAGE;
+			default:
+				printf("DEBUG: No option was chosen so -a will run by default\n c is : %c\n", c);
 		}
-*/
+
 	}
 		
 }
