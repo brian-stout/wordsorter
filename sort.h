@@ -8,8 +8,6 @@ int l_sort(const void *, const void *);
 
 void n_sort(void);
 
-char **r_sort(char **word_array, int index);
-
 void s_sort(void);
 
 char **sort_word_array(char **word_array, char *flag_str, int index)
@@ -19,9 +17,8 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 	int c;
 
 	//Starting at end of array so the flags are run in reverse order
-	for(size_t i = num_of_sorts; i > 0; --i) {
 		c = flag_str[i-1];
-		//DEBUG: Case statements for the a l n r s flags
+		//DEBUG: Case statements for the a l n s flags
 		switch(c) {
 			case 'a':
 				qsort(word_array, index, sizeof(*word_array), a_sort);
@@ -31,9 +28,6 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 				break;
 			case 'n':
 				n_sort();
-				break;
-			case 'r':
-				word_array = r_sort(word_array, index);
 				break;
 			case 's':
 				s_sort();
@@ -60,11 +54,6 @@ int l_sort(const void *a, const void *b)
 void n_sort(void)
 {
 	printf("Running the n sort function\n");
-}
-
-int r_sort(int i)
-{
-	return i*-1;
 }
 
 void s_sort(void)

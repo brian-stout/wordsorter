@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 
 	bool unique_words_only = false;
 	bool non_alphanum_strip = false;
+	bool reverse_print = false;
 
 	int c;
 
@@ -59,6 +60,13 @@ int main(int argc, char *argv[])
 				//Flag for striping out non-alphanumeric characters from end of words
 				non_alphanum_strip = true;
 				break;
+			case 'r':
+				//Flag for printing out results in reverse
+				if(!reverse_print) {
+					reverse_print = true;
+				} else {
+					reverse_print = false;
+				}
 			case '?':
 				return EX_USAGE;
 			default:
