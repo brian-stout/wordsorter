@@ -159,7 +159,6 @@ void print_words(char **word_array, int index, bool reverse_print)
 			printf("%s\n", word_array[i]);
 			free(word_array[i]);
 		}
-
 	} else {
 		for(int i = index; i > 0; --i){
 			printf("%s\n", word_array[i-1]);
