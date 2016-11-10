@@ -13,15 +13,14 @@ int main(int argc, char *argv[])
 {
 	int print_limiter = -1;
 	
+	//The flag_ind will always be the last value in the str which should be a null byte
+	//It's initially set to 0 so the default value gets overwritten
 	size_t flag_ind = 0;
-	char flag_str[32];
 
-	//Sets default option for the flags
-	//TODO: Can probably do this manually to avoid having to reset the index
-	flag_ind = flag_append(flag_str, 'a', flag_ind);
-
-	//Resets the flag_ind value so the default option is overwritten
-	flag_ind = 0;
+	//Memory for two characters, the default value and a null byte
+	char *flag_str = malloc(2);
+	flag_str[0] = 'a';
+	flag_str[1] = '\0';
 
 	bool unique_words_only = false;
 	bool non_alphanum_strip = false;
@@ -53,23 +52,25 @@ int main(int argc, char *argv[])
 			case 'r':
 				//Flag for reverse order
 				//Test for repeat cases
-			flag_ind = flag_append(flag_str, 'r', flag_ind);
+				flag_ind = flag_append(flag_str, 'r', flag_ind);
 				break;
 			case 'n':
 				//Flag for sort by numeric value
-			flag_ind = flag_append(flag_str, 'n', flag_ind);
+				flag_ind = flag_append(flag_str, 'n', flag_ind);
 				break;
 			case 'l':
-			flag_ind = flag_append(flag_str, 'l', flag_ind);
+				//Flag for sort by length
+				flag_ind = flag_append(flag_str, 'l', flag_ind);
 				break;
 			case 's':
-			flag_ind = flag_append(flag_str, 's', flag_ind);
+				//Flag for sort by scrabble score
+				flag_ind = flag_append(flag_str, 's', flag_ind);
 				break;
 			case 'a':
 				//Flag for sorting words lexicographically (The default)
 				//Flag is still here despite being default
 				//Because user may want to sort with a -a afterwards
-			flag_ind = flag_append(flag_str, 'a', flag_ind);
+				flag_ind = flag_append(flag_str, 'a', flag_ind);
 				break;
 			case 'u':
 				//Flag for not printing out duplicates
@@ -90,13 +91,25 @@ int main(int argc, char *argv[])
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
 	printf("DEBUG: The flag string is now %s \n", flag_str);
-		
+	printf("DEBUG: The strlen of flag_str is %zd \n", strlen(flag_str));
+	
+	//TODO: Put in more relevant location
+	free(flag_str);
 }
 
 size_t flag_append(char str[], char flag, size_t ind)
 {
 	str[ind] = flag;
-	++ind;
-	str[ind] = '\0';
-	return ind;
+	//The length of the string plus one for the null byte
+	str = realloc(str, (strlen(str) + 1));
+
+	//Error handles if realloc fails
+	if(!str) {
+		return -1;
+	}
+	else {
+		++ind;
+		str[ind] = '\0';
+		return ind;
+	}
 }
