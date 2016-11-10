@@ -46,31 +46,19 @@ int l_sort(const void *a, const void *b)
 
 int n_sort(const void *a, const void *b)
 {
-	const char **c = (const char **)a;
-	const char **d = (const char **)b;
-	size_t length;
-
-	if(strlen(*c) > strlen(*d)){
-		length = strlen(*d);
-	} else {
-		length = strlen(*c);
+	const char *c = *(const char **)a;
+	const char *d = *(const char **)b;
+	if(isdigit(c[0]) && (isdigit(d[0]) == false)){
+		printf("C has a digit, d does not\n");
+		return -1;
+	} else if ((isdigit(c[0]) == false) && isdigit(d[0])){
+		printf("D has a digit, C does not \n");
+		return 1;
+	} else if (isdigit(c[0]) && isdigit(d[0])){
+		printf("C and D are digits\n");
+		return 0;
 	}
-	for(size_t i = 0; i < length; ++i){
-		if(isdigit(c[i]) && !isdigit(d[i])){
-			return -1;
-		} else if (!isdigit(c[i]) && isdigit(d[i])){
-			return 1;
-		} else if (isdigit(c[i]) && isdigit(d[i])){
-			if(c[i] != d[i]){
-				return c[i] - d[i];
-			} else {
-				continue;
-			}
-		} else {
-			break;
-		}
-	}
-	return strcmp(*(const char **)a, *(const char **)b);
+	return 0;
 }
 
 void s_sort(void)
