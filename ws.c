@@ -67,10 +67,7 @@ int main(int argc, char *argv[])
 
 	}
 	//Initialization for word storage
-	char *token;
-	char buf[128];
 	int index = 0;
-	char *tmp;
 	char **word_array = malloc((1 + index) * sizeof(*word_array));
 
 	if(optind == argc) {
@@ -129,5 +126,30 @@ bool argument_checker(int argc, char *argv[])
 
 int file_read(char **word_array, FILE *fp, int index)
 {
+	buf[128];
+	char *tmp;
+	char *token;
+
+	while(fgets(buf, sizeof(buf), fp1)) {
+		token = strtok(buf, " \n\t");
+		word_array = realloc(word_array, (1 + index) * sizeof(*word_array));
+		tmp = malloc(strlen(token) + 1);
+		strncpy(tmp, token, strlen(token) + 1);
+		word_array[index] = tmp;
+		++index;
+		while(token != NULL){
+			token = strtok(NULL, " \n\t");
+			if (token != NULL){
+				word_array = realloc(word_array, (1 + index) * sizeof(*word_array));
+				tmp = malloc(strlen(token) + 1);
+				strncpy(tmp, token, strlen(token) + 1);
+				word_array[index] = tmp;
+				++index;
+			}
+			else {
+				break;
+			}
+		}
+	}
 	return index;	
 }
