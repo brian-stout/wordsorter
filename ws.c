@@ -1,5 +1,8 @@
+#define _XOPEN_SOURCE
+
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[])
@@ -12,8 +15,16 @@ int main(int argc, char *argv[])
 	bool non_alphanum_strip = false;
 
 	int c;
+
+	for(int i = 1; i < argc; ++i) {
+		if((strncmp(argv[i], "-h", 2) == 0)) {
+			printf("I found -h!\n");
+		}
+	}
 	while(-1 < (c = getopt(argc,argv, "c:rnlsauhp"))) {
 		char *err;
+		printf("%c\n", c);
+/*
 		switch(c) {
 			case 'c':
 				//strtol value to print_limiter
@@ -38,7 +49,9 @@ int main(int argc, char *argv[])
 			case 'p':
 				//florish
 				//Flag for striping out non-alphanumeric characters from end of words
+
 		}
+*/
 	}
 		
 }
