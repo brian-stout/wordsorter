@@ -15,6 +15,8 @@ bool argument_checker(int argc, char *argv[]);
 
 char **file_read(char **, FILE *, int *);
 
+void print_words(char **, int, bool);
+
 int main(int argc, char *argv[])
 {
 	if(argument_checker(argc, argv)) {
@@ -67,6 +69,7 @@ int main(int argc, char *argv[])
 				} else {
 					reverse_print = false;
 				}
+				break;
 			case '?':
 				return EX_USAGE;
 			default:
@@ -81,7 +84,7 @@ int main(int argc, char *argv[])
 	char **word_array = malloc((1 + index) * sizeof(*word_array));
 
 	if(optind == argc) {
-		//TODO: Remove debug line
+		//TODO: Remove debug line, add STDIN to word_array
 		printf("DEBUG: User did not input files \n");
 	} else {
 		for(int i = optind; i < argc; ++i) {
@@ -90,12 +93,12 @@ int main(int argc, char *argv[])
 			word_array = file_read(word_array, fp, &index);
 			fclose(fp);
 		}
-		printf("Now running sort_word_array function\n");
-		word_array = sort_word_array(word_array, flag_str, index);
-
 	}
-	printf("DEBUG: print limiter is %d \n", print_limiter);
+	printf("DEBUG: The flag_str is %s\n", flag_str);
+	printf("DEBUG: The reverse_print is %d\n", reverse_print);
+	word_array = sort_word_array(word_array, flag_str, index);
 	printf("%s \n", flag_str);
+	print_words(word_array, index, reverse_print);
 	
 	//TODO: Put in more relevant location
 	free(flag_str);
