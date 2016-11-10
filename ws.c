@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 				return EX_USAGE;
 			default:
 				//TODO: print to stderror
-				printf("DEBUG: No option was chosen so -a will run by default\n c is : %c\n", c);
+				printf("DEBUG: I don't know how you got here \n");
 		}
 
 	}
