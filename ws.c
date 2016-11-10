@@ -66,7 +66,13 @@ int main(int argc, char *argv[])
 		}
 
 	}
-	
+	//Initialization for word storage
+	char *token;
+	char buf[128];
+	int index = 0;
+	char *tmp;
+	char **word_array = malloc((1 + index) * sizeof(*word_array));
+
 	if(optind == argc) {
 		//TODO: Remove debug line
 		printf("DEBUG: User did not input files \n");
@@ -119,6 +125,7 @@ bool argument_checker(int argc, char *argv[])
 	return r;
 }
 
-int file_read(char **word_array, FILE *fp, int index){
-
+int file_read(char **word_array, FILE *fp, int index)
+{
+		
 }
