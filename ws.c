@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
 	bool non_alphanum_strip = false;
 
 	int c;
-
-	while(-1 < (c = getopt(argc, argv, "c:rnlsauhp"))) {
+//ahlnprsu
+	while(-1 < (c = getopt(argc, argv, "c:ahlnprsu"))) {
 		char *err;
 
 		switch(c) {

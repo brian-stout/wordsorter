@@ -11,7 +11,9 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 	//Starting at end of array so the flags are run in reverse order
 	for(size_t i = num_of_sorts; i > 0; --i) {
 		c = flag_str[i-1];
+		//DEBUG: Case statements for the a l n r s flags
 		switch(c) {
+			case
 			default:
 				printf("DEBUG: Running the %c argument now! \n", c);
 				break;
@@ -20,3 +22,7 @@ char **sort_word_array(char **word_array, char *flag_str, int index)
 
 	return word_array;	
 }
+
+
+
+
