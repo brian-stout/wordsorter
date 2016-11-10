@@ -100,10 +100,8 @@ int main(int argc, char *argv[])
 
 int flag_append(char str[], char flag, int ind)
 {
-	//The length of the string plus one for the null byte
 	str[ind] = flag;
 	++ind;
 	str[ind] = '\0';
 	return ind;
-
 }
