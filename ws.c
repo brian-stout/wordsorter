@@ -46,34 +46,6 @@ int main(int argc, char *argv[])
 					return EX_USAGE;
 				}
 				break;
-			case 'r':
-				//Flag for reverse order
-				//Test for repeat cases
-				flag_str = realloc(flag_str, flag_ind + 2);
-				flag_ind = flag_append(flag_str, 'r', flag_ind);
-				break;
-			case 'n':
-				//Flag for sort by numeric value
-				flag_str = realloc(flag_str, flag_ind + 2);
-				flag_ind = flag_append(flag_str, 'n', flag_ind);
-				break;
-			case 'l':
-				//Flag for sort by length
-				flag_str = realloc(flag_str, flag_ind + 2);
-				flag_ind = flag_append(flag_str, 'l', flag_ind);
-				break;
-			case 's':
-				//Flag for sort by scrabble score
-				flag_str = realloc(flag_str, flag_ind + 2);
-				flag_ind = flag_append(flag_str, 's', flag_ind);
-				break;
-			case 'a':
-				//Flag for sorting words lexicographically (The default)
-				//Flag is still here despite being default
-				//Because user may want to sort with a -a afterwards
-				flag_ind = flag_append(flag_str, 'a', flag_ind);
-				flag_str = realloc(flag_str, flag_ind + 2);
-				break;
 			case 'u':
 				//Flag for not printing out duplicates
 				//Probably going to be a flag affecting print so needs it's own flag
@@ -86,8 +58,9 @@ int main(int argc, char *argv[])
 			case '?':
 				return EX_USAGE;
 			default:
-				//TODO: print to stderror
-				printf("DEBUG: I don't know how you got here \n");
+				flag_ind = flag_append(flag_str, c, flag_ind);
+				flag_str = realloc(flag_str, flag_ind + 2);
+				break;
 		}
 
 	}
@@ -97,6 +70,7 @@ int main(int argc, char *argv[])
 		printf("DEBUG: User did not input files \n");
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
+	printf("%s \n", flag_str);
 	
 	//TODO: Put in more relevant location
 	free(flag_str);
