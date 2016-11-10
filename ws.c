@@ -68,6 +68,10 @@ int main(int argc, char *argv[])
 	if(optind == argc) {
 		//TODO: Remove debug line
 		printf("DEBUG: User did not input files \n");
+	} else {
+		for(int i = optind; i < argc; ++i) {
+			printf("DEBUG: File to be opened: %s \n", argv[i]);
+		}
 	}
 	printf("DEBUG: print limiter is %d \n", print_limiter);
 	printf("%s \n", flag_str);
