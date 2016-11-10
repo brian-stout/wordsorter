@@ -11,7 +11,9 @@ int flag_append(char [], char, int);
 
 bool argument_checker(int argc, char *argv[]);
 
-char **file_read(char **word_array, FILE *fp, int *index);
+char **file_read(char **, FILE *, int *);
+
+char **sort_word_array(char **, char *, int);
 
 int main(int argc, char *argv[])
 {
@@ -80,8 +82,9 @@ int main(int argc, char *argv[])
 			word_array = file_read(word_array, fp, &index);
 			fclose(fp);
 		}
+		printf("Now running sort_word_array function\n");
+		word_array = sort_word_array(word_array, flag_str, index);
 		for(int i = 0; i < index; ++i){
-			printf("%s\n", word_array[i]);
 			free(word_array[i]);
 		}
 		free(word_array);
@@ -157,5 +160,16 @@ char **file_read(char **word_array, FILE *fp, int *index)
 			}
 		}
 	}
+	return word_array;	
+}
+
+char **sort_word_array(char **word_array, char *flag_str, int index)
+{
+	printf("%d\n", index);
+	printf("%s\n", flag_str);
+	for(int i = 0; i < index; ++i){
+		printf("%s\n", word_array[i]);
+	}
+
 	return word_array;	
 }
