@@ -2,13 +2,14 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sysexits.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[])
 {
-	//int print_limiter = -1;
+	int print_limiter = -1;
 	
 	//char sort_flag_str[8];
 	//int sort_flag_str_ind = 0;
@@ -24,7 +25,7 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 	}
-	while(-1 < (c = getopt(argc,argv, "c:rnlsauhp"))) {
+	while(-1 < (c = getopt(argc, argv, "c:rnlsauhp"))) {
 		char *err;
 		printf("%c ", c);
 		printf("\n");
@@ -32,6 +33,13 @@ int main(int argc, char *argv[])
 		switch(c) {
 			case 'c':
 				//strtol value to print_limiter
+				print_limiter = strtol(optarg, &err, 10);
+				if(*err) {
+					//TODO: print to stderror
+					printf("Error: -c must be followed by a valid number \n");
+					return EX_USAGE;
+				}
+				break;
 			case 'r':
 				//Flag for reverse order
 				//Test for repeat cases
@@ -56,9 +64,11 @@ int main(int argc, char *argv[])
 			case '?':
 				return EX_USAGE;
 			default:
+				//TODO: print to stderror
 				printf("DEBUG: No option was chosen so -a will run by default\n c is : %c\n", c);
 		}
 
 	}
+	printf("DEBUG: print limiter is %d \n", print_limiter);
 		
 }
