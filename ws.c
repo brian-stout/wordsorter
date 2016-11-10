@@ -9,8 +9,14 @@
 
 int flag_append(char [], char, int);
 
+bool argument_checker(int argc, char *argv[]);
+
 int main(int argc, char *argv[])
 {
+	if(argument_checker(argc, argv)) {
+		return EX_USAGE;
+	}
+
 	int print_limiter = -1;
 	
 	//The flag_ind will always be the last value in the str which should be a null byte
@@ -26,13 +32,7 @@ int main(int argc, char *argv[])
 	bool non_alphanum_strip = false;
 
 	int c;
-	for(int i = 1; i < argc; ++i) {
-		if((strncmp(argv[i], "-h", 2) == 0)) {
-			//TODO: write an actual help message, put it in a function to save space
-			printf("The help message goes here!\n");
-			return 1;
-		}
-	}
+
 	while(-1 < (c = getopt(argc, argv, "c:rnlsauhp"))) {
 		char *err;
 
@@ -108,4 +108,30 @@ int flag_append(char str[], char flag, int ind)
 	++ind;
 	str[ind] = '\0';
 	return ind;
+}
+
+bool argument_checker(int argc, char *argv[])
+{
+	bool r = false;
+
+	for(int i = 0; i < argc; ++i) {
+		if(argv[i][0] == '-') {
+			if(argv[i][1] == ' ' || argv[i][1] == '\0') {
+				printf("Usage: [-rnlsauhp] [-c <word limit>] *[files]\n");
+				r = true;
+			}
+			else if(argv[1][1] != '-') {
+				printf("Usage: [-rnlsauhp] [-c <word limit>] *[files]\n");
+			}
+		}
+	}
+
+	for(int i = 1; i < argc; ++i) {
+		if((strncmp(argv[i], "-h", 2) == 0)) {
+			//TODO: write an actual help message, put it in a function to save space
+			printf("Help message goes here!\n");
+			r = true;
+		}
+	}
+	return r;
 }
