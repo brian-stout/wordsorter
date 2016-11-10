@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
 	int print_limiter = -1;
 	
-	flag_ind = 0;
+	size_t flag_ind = 0;
 	char sort_flag_str[32];
 
 	//TODO: Put this in append flag function
@@ -72,14 +72,14 @@ int main(int argc, char *argv[])
 			case 'u':
 				//Flag for not printing out duplicates
 				//Probably going to be a flag affecting print so needs it's own flag
-				unique_word_only = true;
+				unique_words_only = true;
 				break;
 			case 'h':
 				//Prints out help options
 				break;
 			case 'p':
 				//Flag for striping out non-alphanumeric characters from end of words
-				bool unique_words_only = true;
+				non_alphanum_strip = true;
 				break;
 			case '?':
 				return EX_USAGE;
