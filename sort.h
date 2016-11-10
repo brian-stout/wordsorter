@@ -1,6 +1,6 @@
 #include <string.h>
 
-char **sort_word_array(char **, char *, int);
+char **sort_word_array(char **, char, int);
 
 int a_sort(const void *, const void *);
 
@@ -13,6 +13,7 @@ void s_sort(void);
 char **sort_word_array(char **word_array, char sort_flag, int index)
 {
 	//DEBUG: Case statements for the a l n s flags
+	//TODO: Set a pointer to a function and qsort that out of switch statement
 	switch(sort_flag) {
 		case 'a':
 			qsort(word_array, index, sizeof(*word_array), a_sort);
@@ -27,7 +28,6 @@ char **sort_word_array(char **word_array, char sort_flag, int index)
 			s_sort();
 			break;
 		default:
-			printf("DEBUG: Running the %c argument now! \n", c);
 			break;
 		}
 	return word_array;	

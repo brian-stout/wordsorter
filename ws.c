@@ -23,9 +23,6 @@ int main(int argc, char *argv[])
 
 	int print_limiter = -1;
 	
-	//The flag_ind will always be the last value in the str which should be a null byte
-	//It's initially set to 0 so the default value gets overwritten
-	int flag_ind = 0;
 	//TODO: The string is unnesscary, just overwite the character each time
 	//Memory for two characters, the default value and a null byte
 	char sort_flag = 'a';
@@ -89,10 +86,9 @@ int main(int argc, char *argv[])
 			fclose(fp);
 		}
 	}
-	printf("DEBUG: The sort_flag is %s\n", sort_flag);
 	printf("DEBUG: The reverse_print is %d\n", reverse_print);
 	word_array = sort_word_array(word_array, sort_flag, index);
-	printf("%s \n", sort_flag);
+	printf("%c \n", sort_flag);
 	print_words(word_array, index, reverse_print);
 	
 }
