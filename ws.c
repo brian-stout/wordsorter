@@ -7,18 +7,20 @@
 
 int main(int argc, char *argv[])
 {
-	int print_limiter = -1;
+	//int print_limiter = -1;
 	
-	char sort_flag_str[8];
-	int sort_flag_str_ind = 0;
-	bool unique_words_only = false;
-	bool non_alphanum_strip = false;
+	//char sort_flag_str[8];
+	//int sort_flag_str_ind = 0;
+	//bool unique_words_only = false;
+	//bool non_alphanum_strip = false;
 
 	int c;
 
 	for(int i = 1; i < argc; ++i) {
 		if((strncmp(argv[i], "-h", 2) == 0)) {
-			printf("I found -h!\n");
+			//TODO: write an actual help message, put it in a function to save space
+			printf("The help message goes here!\n");
+			return 1;
 		}
 	}
 	while(-1 < (c = getopt(argc,argv, "c:rnlsauhp"))) {
