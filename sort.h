@@ -70,10 +70,8 @@ int n_sort(const void *a, const void *b)
 
 
 	if(isdigit(c[0]) && (isdigit(d[0]) == false)){
-		printf("C has a digit, d does not\n");
 		return -1;
 	} else if ((isdigit(c[0]) == false) && isdigit(d[0])){
-		printf("D has a digit, C does not \n");
 		return 1;
 	} else if (isdigit(c[0]) && isdigit(d[0])){
 		token = strtok_r(c, delim, &saveptr1);
