@@ -39,12 +39,12 @@ char **sort_word_array(char **word_array, char sort_flag, int index)
 		}
 	return word_array;	
 }
-//Alphabetically
+
 int a_sort(const void *a, const void *b)
 {
 	return strcmp(*(const char **)a, *(const char **)b);
 }
-//Length
+
 int l_sort(const void *a, const void *b)
 {
 	return strlen(*(const char **)a) - strlen(*(const char **)b);
@@ -58,17 +58,26 @@ int n_sort(const void *a, const void *b)
 
 	char str1[64];
 	char str2[64];
-	if(isdigit(c[0]) && (isdigit(d[0]) == false)){
+
+	//If the first word starts with a digit and the second one doesn't
+	//it takes precedence in sort
+	if(isdigit(c[0]) && (isdigit(d[0]) == false)) {
 		return -1;
-	}else if ((isdigit(c[0]) == false) && isdigit(d[0])){
+	//If the reverse is true the second word takes precedence
+	}
+	else if ((isdigit(c[0]) == false) && isdigit(d[0])) {
 		return 1;
-	}else if (isdigit(c[0]) && isdigit(d[0])){
+	//If both words start with digits, take the actual value of the numbers
+	}
+	else if (isdigit(c[0]) && isdigit(d[0])) {
 		strncpy(str1, c, strlen(c)+1);
 		strncpy(str2, d, strlen(c)+1);
 		int first = strtol(c, NULL, 10);
 		int second = strtol(d, NULL, 10);
 		return first - second;
-	}else{
+	}
+	//If neither words start with digits, compare normally
+	else {
 		return strcmp(c, d);
 	}
 }
@@ -82,6 +91,7 @@ int scrabble_score(const char s[])
 {
 	int score = 0;	
 	size_t end = strlen(s);
+	//For each character in the string, find the value of that character
 	for(size_t i = 0; i < end; ++i){
 		if(!isdigit(s[i])){
 			score += scrabble_chart(s[i]);
