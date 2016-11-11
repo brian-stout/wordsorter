@@ -72,7 +72,6 @@ int main(int argc, char *argv[])
 				sort_flag = c;
 				break;
 		}
-
 	}
 	//Initialization for word storage
 	int index = 0;
@@ -137,7 +136,7 @@ char **input_read(char **word_array, FILE *fp, int *index)
 	char *tmp;
 	char *token;
 
-	//If the function was run with FP being stdin 
+	//If the function was run with FP being stdin
 	//give instructions to the user
 	if(fp == stdin) {
 		printf("Please enter a list of words.\n");
@@ -147,7 +146,7 @@ char **input_read(char **word_array, FILE *fp, int *index)
 	while(fgets(buf, sizeof(buf), fp)) {
 		if(buf[0] == '\n') {
 			if(fp == stdin) {
-				//If the function using stdin a newline should stop 
+				//If the function using stdin a newline should stop
 				//the function o the program can continue to run
 				break;
 			}
