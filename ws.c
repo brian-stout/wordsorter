@@ -122,17 +122,25 @@ char **file_read(char **word_array, FILE *fp, int *index)
 	char *tmp;
 	char *token;
 
+	//If the function was run with FP being stdin 
+	//give instructions to the user
 	if(fp == stdin){
 		printf("Please enter a list of words.\n");
 		printf("Entering nothing will sort the files!\n\n");
 	}
 	
 	while(fgets(buf, sizeof(buf), fp)) {
-		//Skips new lines to avoid crashes
+
 		if(buf[0] == '\n'){
+
 			if(fp == stdin){
+				//If the function using stdin a newline should stop 
+				//the function o the program can continue to run
 				break;
 			} else {
+				//If input is being read from a file
+				//the function just skips the loop to avoid
+				//the newline crashing the program
 				continue;
 			}
 		}
