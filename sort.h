@@ -19,8 +19,7 @@ int scrabble_chart(char c);
 
 char **sort_word_array(char **word_array, char sort_flag, int index)
 {
-	//DEBUG: Case statements for the a l n s flags
-	//TODO: Set a pointer to a function and qsort that out of switch statement
+	//TODO: set a pointer to the function and run q sort with that pointer
 	switch(sort_flag) {
 		case 'a':
 			qsort(word_array, index, sizeof(*word_array), a_sort);
