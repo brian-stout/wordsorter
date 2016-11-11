@@ -1,3 +1,5 @@
+#define _POSIX_C_SOURCE 200112L
+
 #include <string.h>
 #include <ctype.h>
 
@@ -50,24 +52,37 @@ int l_sort(const void *a, const void *b)
 
 int n_sort(const void *a, const void *b)
 {
+
 	int first;
 	int second;
 
-	const char *c = *(const char **)a;
-	const char *d = *(const char **)b;
+	char *c = *(const char **)a;
+	char *d = *(const char **)b;
 	
+	if(isdigit(c[0]) == 0 && isdigit(d[0]) == 0){
+		return strcmp(c, d);
+	}
+
 	char *token, *saveptr1;
 	char *subtoken, *saveptr2;
-
-	if(isdigit(c[0]) == 0 && isdigit(d[0]) == 0){
-		return strcmp(*a, *b);
-	}
-	else if(isdigit(c[0]) && isdigit(d[0])){
-		
-	}
-	else if(isdigit(
-
 	
+	char delim[] = "aAbBcDdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
+
+
+	if(isdigit(c[0]) && (isdigit(d[0]) == false)){
+		printf("C has a digit, d does not\n");
+		return -1;
+	} else if ((isdigit(c[0]) == false) && isdigit(d[0])){
+		printf("D has a digit, C does not \n");
+		return 1;
+	} else if (isdigit(c[0]) && isdigit(d[0])){
+		token = strtok_r(c, delim, &saveptr1);
+		first = strtol(token, NULL, 10);
+		subtoken = strtok_r(d, delim, &saveptr2);
+		second = strtol(subtoken, NULL, 10);
+		return first - second;
+	}
+	return 0;
 }
 
 int s_sort(const void *a, const void *b)
