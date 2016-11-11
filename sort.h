@@ -1,6 +1,6 @@
 #include <string.h>
 #include <ctype.h>
-#include <bool.h>
+#include <stdbool.h>
 
 char **sort_word_array(char **, char, int);
 
@@ -8,9 +8,9 @@ int a_sort(const void *, const void *);
 
 int l_sort(const void *, const void *);
 
-int n_sort(const void *a, const void *b);
+int n_sort(const void *, const void *);
 
-void s_sort(void);
+int s_sort(const void *, const void *);
 
 int scrabble_score(char s[]);
 
@@ -31,7 +31,7 @@ char **sort_word_array(char **word_array, char sort_flag, int index)
 			qsort(word_array, index, sizeof(*word_array), n_sort);
 			break;
 		case 's':
-			s_sort();
+			qsort(word_array, index, sizeof(*word_array), s_sort);
 			break;
 		default:
 			break;
