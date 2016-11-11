@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 	int index = 0;
 	char **word_array = malloc((1 + index) * sizeof(*word_array));
 
-	//If the user only inputed options then use stdin as a read
+	//If the user only inputed options then use stdin as the read
 	if(optind == argc) {
 			word_array = input_read(word_array, stdin, &index);
 	}
@@ -85,6 +85,7 @@ int main(int argc, char *argv[])
 	else {
 		for(int i = optind; i < argc; ++i) {
 			FILE *fp = fopen(argv[i], "r");
+			//If file can not be opened, error out
 			if(!fp) {
 				printf("Error: Could not open %s!\n", argv[i]);
 				return EX_NOINPUT;
@@ -93,8 +94,10 @@ int main(int argc, char *argv[])
 			fclose(fp);
 		}
 	}
+	//Takes in the word_array and sorts it based on the sort_flag
 	word_array = sort_word_array(word_array, sort_flag, index);
-	printf("DEBUG: Limit print by %d\n", print_limiter);
+	//Handles the logic on what words to print based on the
+	//the flags and additional options
 	print_words(word_array, index, reverse_print, unique_words_only, print_limiter);
 	
 }
@@ -120,7 +123,6 @@ bool argument_checker(int argc, char *argv[])
 	//Checks for -h option so it can display the help message
 	for(int i = 1; i < argc; ++i) {
 		if((strncmp(argv[i], "-h", 2) == 0)) {
-			//TODO: write an actual help message, put it in a function to save space
 			print_help();
 			r = true;
 		}
@@ -183,7 +185,7 @@ char **input_read(char **word_array, FILE *fp, int *index)
 	}
 	return word_array;	
 }
-//TODO: Implement bit masks for flags
+
 void print_words(char **word_array, int index, bool reverse_print, bool unique, int print_limiter)
 {	
 	char prev_word[64];
@@ -191,20 +193,29 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique, 
 
 	if(!reverse_print) {
 		for(int i = 0; i < index; ++i){
+			//By default print_limiter is set to -1
+			//If user implemented a number it will decrement till it hits zero
 			if(print_limiter != 0){
+				//If the unique flag isn't set the program will print normally
 				if(!unique){
 					printf("%s\n", word_array[i]);
 					--print_limiter;
 				}
+				//Checks to see if the previous word printed is next in the array
+				//If it is, it doesn't get printed
 				else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
 					strncpy(prev_word, word_array[i], sizeof(prev_word));
 					printf("%s\n", word_array[i]);
 					--print_limiter;
 				}
 			}
+			//Set outside all the logic so the loop always frees the memory
 			free(word_array[i]);
 		}
 	} else {
+		//Sets i to the top of the increment and decrements to go in reverse order
+		//index - 1 because index is what you print up to
+		//word_array[index] is out of range
 		for(int i = index-1; i >= 0; --i){
 			if(print_limiter != 0){
 				if(!unique){
@@ -220,7 +231,8 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique, 
 			free(word_array[i]);
 		}
 	}
-	
+	//After the function is done with the word_array it frees up all the memory
+	//allocated in the array for pointers
 	free(word_array);
 }
 
