@@ -159,7 +159,7 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique)
 	
 	if(!reverse_print) {
 		for(int i = 0; i < index; ++i){
-			if(strncmp(word_array[i], prev_word, strlen(word_array[i] + 1) != 0 || !unique){
+			if(!unique || (strncmp(word_array[i], prev_word, strlen(word_array[i] + 1)) != 0)){
 				printf("%s\n", word_array[i]);
 				tmp = realloc(prev_word, strlen(word_array[i] + 1);
 				prev_word = tmp;
