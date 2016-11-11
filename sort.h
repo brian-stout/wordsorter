@@ -1,6 +1,5 @@
 #include <string.h>
 #include <ctype.h>
-#include <stdbool.h>
 
 char **sort_word_array(char **, char, int);
 
@@ -12,9 +11,9 @@ int n_sort(const void *, const void *);
 
 int s_sort(const void *, const void *);
 
-int scrabble_score(char s[]);
+int scrabble_score(const char s[]);
 
-bool in_string(char c, char s[]);
+int scrabble_chart(char c);
 
 char **sort_word_array(char **word_array, char sort_flag, int index)
 {
@@ -63,52 +62,67 @@ int s_sort(const void *a, const void *b)
 	return scrabble_score(*(const char **)a) - scrabble_score(*(const char **)b);
 }
 
-int scrabble_score(char s[])
+int scrabble_score(const char s[])
 {
-	char one_point[] = "eaionrtlsu";
-	char two_point[] = "dg";
-	char three_point[] = "bcmp";
-	char four_point[] = "fhvwy";
-	//five point is just k and will be directly compared
-	char eight_point[] = "jk";
-	char ten_point[] = "qz";
-	int score = 0;
-	
+	int score = 0;	
 	size_t end = strlen(s);
 	for(size_t i = 0; i < end; ++i){
-		if(in_string(s[i], one_point){
-			score += 1;
-		}
-		if(in_string(s[i], two_point){
-			score += 2;
-		}
-		if(in_string(s[i], three_point){
-			score += 3;
-		}
-		if(in_string(s[i], four_point){
-			score += 4;
-		}
-		if(s[i] == 'k'){
-			score += 5;
-		}
-		if(in_string(s[i], eight_point){
-			score += 8;
-		}
-		if(in_string(s[i], ten_point){
-			score += 10;
-		}
+		score += scrabble_chart(s[i]);	
 	}
 	return score;
 }
 
-bool in_string(char c, char s[])
+int scrabble_chart(char c)
 {
-	size_t length = strlen(length);
-	for(size_t i = 0; i < length; ++i){
-		if(c == s[i]}{
-		return false;
+	int score;
+	c = tolower(c);
+	switch(c) {
+		case 'e':
+		case 'a':
+		case 'i':
+		case 'o':
+		case 'n':
+		case 'r':
+		case 't':
+		case 'l':
+		case 's':
+		case 'u':
+			score = 1;
+			break;
+		case 'd':
+		case 'g':
+			score = 2;
+			break;
+		case 'b':
+		case 'c':
+		case 'm':
+		case 'p':
+			score = 3;
+			break;
+		case 'f':
+		case 'h':
+		case 'v':
+		case 'w':
+		case 'y':
+			score = 4;
+			break;
+		case 'k':
+			score = 5;
+			break;
+		case 'j':
+		case 'x':
+			score = 8;
+			break;
+		case 'q':
+		case 'z':
+			score = 10;
+			break;
+		default:
+			score = 0;
+			break;
 	}
-	return true;
+	return score;
 }
+
 
 

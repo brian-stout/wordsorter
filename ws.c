@@ -156,12 +156,14 @@ void print_words(char **word_array, int index, bool reverse_print)
 {	
 	if(!reverse_print) {
 		for(int i = 0; i < index; ++i){
-			printf("%s\n", word_array[i]);
+			printf("%s", word_array[i]);
+			printf(" scrabble: %d \n", scrabble_score(word_array[i]));
 			free(word_array[i]);
 		}
 	} else {
 		for(int i = index; i > 0; --i){
-			printf("%s\n", word_array[i-1]);
+			printf("%s", word_array[i - 1]);
+			printf(" scrabble: %d \n", scrabble_score(word_array[i - 1]));
 			free(word_array[i-1]);
 		}
 	}
