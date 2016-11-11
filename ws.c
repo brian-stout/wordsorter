@@ -15,6 +15,8 @@ char **input_read(char **, FILE *, int *);
 
 void print_words(char **, int, bool, bool);
 
+void print_help(void);
+
 int main(int argc, char *argv[])
 {
 	if(argument_checker(argc, argv)) {
@@ -109,19 +111,7 @@ bool argument_checker(int argc, char *argv[])
 	for(int i = 1; i < argc; ++i) {
 		if((strncmp(argv[i], "-h", 2) == 0)) {
 			//TODO: write an actual help message, put it in a function to save space
-			printf("\nUsage: [-rnlsauhp] [-c <word limit>] *[files]\n\n");
-			printf("<<Explanation of options>>\n");
-			printf("[Sorting methods]\n");
-			printf("-a: sorts words alphabetically\n");
-			printf("-l: sorts words by their length\n");
-			printf("-n: sorts words by leading numbers\n");
-			printf("-s: sorts words by their scrabble score\n");
-			printf("[Additional options]\n");
-			printf("-p: Strips out non-alphanumeric characters\n");
-			printf("-u: Prevents duplicate entries from being shows\n");
-			printf("-c: Will only print out <number> of lines\n");
-			printf("-h: Prints out help message\n");
-			printf("\n\n");
+			print_help();
 			r = true;
 		}
 	}
@@ -214,4 +204,21 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique)
 	}
 	
 	free(word_array);
+}
+
+void print_help(void)
+{
+			printf("\nUsage: [-rnlsauhp] [-c <word limit>] *[files]\n\n");
+			printf("<<Explanation of options>>\n");
+			printf("[Sorting methods]\n");
+			printf("-a: sorts words alphabetically\n");
+			printf("-l: sorts words by their length\n");
+			printf("-n: sorts words by leading numbers\n");
+			printf("-s: sorts words by their scrabble score\n");
+			printf("[Additional options]\n");
+			printf("-p: Strips out non-alphanumeric characters\n");
+			printf("-u: Prevents duplicate entries from being shows\n");
+			printf("-c: Will only print out <number> of lines\n");
+			printf("-h: Prints out help message\n");
+			printf("\n\n");
 }
