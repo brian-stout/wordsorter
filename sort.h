@@ -1,5 +1,6 @@
 #include <string.h>
 #include <ctype.h>
+#include <bool.h>
 
 char **sort_word_array(char **, char, int);
 
@@ -10,6 +11,10 @@ int l_sort(const void *, const void *);
 int n_sort(const void *a, const void *b);
 
 void s_sort(void);
+
+int scrabble_score(char s[]);
+
+bool in_string(char c, char s[]);
 
 char **sort_word_array(char **word_array, char sort_flag, int index)
 {
@@ -53,11 +58,57 @@ int n_sort(const void *a, const void *b)
 	
 }
 
-void s_sort(void)
+int s_sort(const void *a, const void *b)
 {
-	printf("Running the s sort function\n");
+	return scrabble_score(*(const char **)a) - scrabble_score(*(const char **)b);
 }
 
+int scrabble_score(char s[])
+{
+	char one_point[] = "eaionrtlsu";
+	char two_point[] = "dg";
+	char three_point[] = "bcmp";
+	char four_point[] = "fhvwy";
+	//five point is just k and will be directly compared
+	char eight_point[] = "jk";
+	char ten_point[] = "qz";
+	int score = 0;
+	
+	size_t end = strlen(s);
+	for(size_t i = 0; i < end; ++i){
+		if(in_string(s[i], one_point){
+			score += 1;
+		}
+		if(in_string(s[i], two_point){
+			score += 2;
+		}
+		if(in_string(s[i], three_point){
+			score += 3;
+		}
+		if(in_string(s[i], four_point){
+			score += 4;
+		}
+		if(s[i] == 'k'){
+			score += 5;
+		}
+		if(in_string(s[i], eight_point){
+			score += 8;
+		}
+		if(in_string(s[i], ten_point){
+			score += 10;
+		}
+	}
+	return score;
+}
 
+bool in_string(char c, char s[])
+{
+	size_t length = strlen(length);
+	for(size_t i = 0; i < length; ++i){
+		if(c == s[i]}{
+		return false;
+	}
+	return true;
+}
 
 
