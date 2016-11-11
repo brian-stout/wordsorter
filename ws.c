@@ -74,8 +74,7 @@ int main(int argc, char *argv[])
 	char **word_array = malloc((1 + index) * sizeof(*word_array));
 
 	if(optind == argc) {
-		//TODO: Remove debug line, add STDIN to word_array
-		printf("DEBUG: User did not input files \n");
+			word_array = file_read(word_array, stdin, &index);
 	} else {
 		for(int i = optind; i < argc; ++i) {
 			FILE *fp = fopen(argv[i], "r");
@@ -122,12 +121,20 @@ char **file_read(char **word_array, FILE *fp, int *index)
 	char buf[128];
 	char *tmp;
 	char *token;
+
+	if(fp == stdin){
+		printf("Please enter a list of words.\n");
+		printf("Entering nothing will sort the files!\n\n");
+	}
 	
-	printf("I made it here!\n");
 	while(fgets(buf, sizeof(buf), fp)) {
 		//Skips new lines to avoid crashes
 		if(buf[0] == '\n'){
-			continue;
+			if(fp == stdin){
+				break;
+			} else {
+				continue;
+			}
 		}
 		token = strtok(buf, " \n\t");
 		//Preps the word array for an additional pointer
