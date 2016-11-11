@@ -23,17 +23,16 @@ int main(int argc, char *argv[])
 		return EX_USAGE;
 	}
 
-	int print_limiter = 0;
+	int print_limiter = -1;
 
 	char sort_flag = 'a';
 
 	bool unique_words_only = false;
-	bool non_alphanum_strip = false;
 	bool reverse_print = false;
 
 	int c;
 
-	while(-1 < (c = getopt(argc, argv, "c:ahlnprsu"))) {
+	while(-1 < (c = getopt(argc, argv, "c:ahlnrsu"))) {
 		char *err;
 
 		switch(c) {
@@ -47,17 +46,13 @@ int main(int argc, char *argv[])
 				}
 				if(print_limiter < 0) {
 					printf("Error: -c can not be followed by a negative number \n");
-					return EX_USAGE
+					return EX_USAGE;
 				}
 				break;
 			case 'u':
 				//Flag for not printing out duplicates
 				//Probably going to be a flag affecting print so needs it's own flag
 				unique_words_only = true;
-				break;
-			case 'p':
-				//Flag for striping out non-alphanumeric characters from end of words
-				non_alphanum_strip = true;
 				break;
 			case 'r':
 				//Flag for printing out results in reverse
@@ -185,29 +180,32 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique, 
 	prev_word[0] = '\0';
 
 	if(!reverse_print) {
-
-		if(print_limiter != 0){
-			if(print_limiter > 
-		}
-
-		for(int i = 0; i < loop_count; ++i){
-			if(!unique){
-				printf("%s\n", word_array[i]);
-			}
-			else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
-				strncpy(prev_word, word_array[i], sizeof(prev_word));
-				printf("%s\n", word_array[i]);	
+		for(int i = 0; i < index; ++i){
+			if(print_limiter != 0){
+				if(!unique){
+					printf("%s\n", word_array[i]);
+					--print_limiter;
+				}
+				else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
+					strncpy(prev_word, word_array[i], sizeof(prev_word));
+					printf("%s\n", word_array[i]);
+					--print_limiter;
+				}
 			}
 			free(word_array[i]);
 		}
 	} else {
-		for(int i = index; i > (index - print_limiter); --i){
-			if(!unique){
-				printf("%s\n", word_array[i]);
-			} 
-			else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
-				strncpy(prev_word, word_array[i], sizeof(prev_word));
-				printf("%s\n", word_array[i]);	
+		for(int i = index-1; i >= 0; --i){
+			if(print_limiter != 0){
+				if(!unique){
+					printf("%s\n", word_array[i]);
+					--print_limiter;
+				}
+				else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
+					strncpy(prev_word, word_array[i], sizeof(prev_word));
+					printf("%s\n", word_array[i]);
+					--print_limiter;
+				}
 			}
 			free(word_array[i]);
 		}
@@ -226,9 +224,9 @@ void print_help(void)
 			printf("-n: sorts words by leading numbers\n");
 			printf("-s: sorts words by their scrabble score\n");
 			printf("[Additional options]\n");
-			printf("-p: Strips out non-alphanumeric characters\n");
 			printf("-u: Prevents duplicate entries from being shows\n");
 			printf("-c: Will only print out <number> of lines\n");
 			printf("-h: Prints out help message\n");
 			printf("\n\n");
 }
+
