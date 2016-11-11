@@ -92,7 +92,7 @@ int scrabble_score(const char s[])
 	int score = 0;	
 	size_t end = strlen(s);
 	//For each character in the string, find the value of that character
-	for(size_t i = 0; i < end; ++i){
+	for(size_t i = 0; i < end; ++i) {
 		if(!isdigit(s[i])){
 			score += scrabble_chart(s[i]);
 		}	
