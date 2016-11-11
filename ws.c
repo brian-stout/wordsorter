@@ -9,10 +9,27 @@
 
 #include "sort.h"
 
+
+/** argument_check() uses argv and argv to test for common
+*		user input pitfalls.  It also contains the logic
+*		for looking for -h and runs the print_help()
+*		when it sees it
+*/
 bool argument_checker(int argc, char *argv[]);
 
+
+/**	input_read() either uses stdin or a FILE * for the second
+*		argument.  It passes in a pointer to an integer so that
+*		it can keep appending to the array passed to it with
+*		multiple files
+*/
 char **input_read(char **, FILE *, int *);
 
+
+/**
+*
+*
+*/
 void print_words(char **, int, bool, bool, int);
 
 void print_help(void);
