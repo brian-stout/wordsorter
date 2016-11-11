@@ -13,7 +13,7 @@ bool argument_checker(int argc, char *argv[]);
 
 char **input_read(char **, FILE *, int *);
 
-void print_words(char **, int, bool, bool);
+void print_words(char **, int, bool, bool, int);
 
 void print_help(void);
 
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 		return EX_USAGE;
 	}
 
-	int print_limiter = -1;
+	int print_limiter = 0;
 
 	char sort_flag = 'a';
 
@@ -85,7 +85,8 @@ int main(int argc, char *argv[])
 		}
 	}
 	word_array = sort_word_array(word_array, sort_flag, index);
-	print_words(word_array, index, reverse_print, unique_words_only);
+	printf("DEBUG: Limit print by %d\n", print_limiter);
+	print_words(word_array, index, reverse_print, unique_words_only, print_limiter);
 	
 }
 
@@ -174,13 +175,13 @@ char **input_read(char **word_array, FILE *fp, int *index)
 	return word_array;	
 }
 //TODO: Implement bit masks for flags
-void print_words(char **word_array, int index, bool reverse_print, bool unique)
+void print_words(char **word_array, int index, bool reverse_print, bool unique, int print_limiter)
 {	
 	char prev_word[64];
 	prev_word[0] = '\0';
 
 	if(!reverse_print) {
-		for(int i = 0; i < index; ++i){
+		for(int i = 0; i < (index - print_limiter); ++i){
 			if(!unique){
 				printf("%s\n", word_array[i]);
 			}
@@ -191,7 +192,7 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique)
 			free(word_array[i]);
 		}
 	} else {
-		for(int i = index; i > 0; --i){
+		for(int i = index; i > print_limiter; --i){
 			if(!unique){
 				printf("%s\n", word_array[i]);
 			} 
