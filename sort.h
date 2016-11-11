@@ -21,10 +21,20 @@ int a_sort(const void *, const void *);
 */
 int l_sort(const void *, const void *);
 
+
+/**	n_sort() handles the logic to sort by the first numbers
+*/
 int n_sort(const void *, const void *);
 
+
+/**	s_sort() handles the logic to sort by the scrabble score of the word
+*/
 int s_sort(const void *, const void *);
 
+
+/**	scrabble_score() is used to determine the scrabble score of the entire word
+		by comparing each character with scrabble_chart()
+*/
 int scrabble_score(const char s[]);
 
 int scrabble_chart(char c);
