@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
 	}
 
 	int print_limiter = -1;
-	
 
 	char sort_flag = 'a';
 
@@ -123,8 +122,12 @@ char **file_read(char **word_array, FILE *fp, int *index)
 	char buf[128];
 	char *tmp;
 	char *token;
-
+	
+	printf("I made it here!\n");
 	while(fgets(buf, sizeof(buf), fp)) {
+		if(buf[0] == '\n'){
+			continue;
+		}
 		token = strtok(buf, " \n\t");
 		word_array = realloc(word_array, (1 + *index) * sizeof(*word_array));
 		tmp = malloc(strlen(token) + 1);
