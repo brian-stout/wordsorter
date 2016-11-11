@@ -52,8 +52,8 @@ int n_sort(const void *a, const void *b)
 {
 	const char *c = *(const char **)a;
 	const char *d = *(const char **)b;
-	size_t c_length = strlen(c);
-	size_t d_length = strlen(d);
+	char buf_c[64];
+	char buf_d[64];
 	
 }
 
