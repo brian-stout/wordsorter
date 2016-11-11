@@ -50,10 +50,23 @@ int l_sort(const void *a, const void *b)
 
 int n_sort(const void *a, const void *b)
 {
+	int first;
+	int second;
+
 	const char *c = *(const char **)a;
 	const char *d = *(const char **)b;
-	char buf_c[64];
-	char buf_d[64];
+	
+	char *token, *saveptr1;
+	char *subtoken, *saveptr2;
+
+	if(isdigit(c[0]) == 0 && isdigit(d[0]) == 0){
+		return strcmp(*a, *b);
+	}
+	else if(isdigit(c[0]) && isdigit(d[0])){
+		
+	}
+	else if(isdigit(
+
 	
 }
 
