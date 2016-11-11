@@ -21,16 +21,8 @@ int a_sort(const void *, const void *);
 */
 int l_sort(const void *, const void *);
 
-
-/**	a_sort() using a basic strcmp to sort files alphabetically
-*		a_sort() is also the default sort
-*/
 int n_sort(const void *, const void *);
 
-
-/**	a_sort() using a basic strcmp to sort files alphabetically
-*		a_sort() is also the default sort
-*/
 int s_sort(const void *, const void *);
 
 int scrabble_score(const char s[]);
