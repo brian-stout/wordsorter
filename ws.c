@@ -155,13 +155,14 @@ char **file_read(char **word_array, FILE *fp, int *index)
 void print_words(char **word_array, int index, bool reverse_print, bool unique)
 {	
 	char prev_word[64];
+	prev_word[0] = '\0';
 
 	if(!reverse_print) {
 		for(int i = 0; i < index; ++i){
 			if(!unique){
 				printf("%s\n", word_array[i]);
-			} 
-			else if((strncmp(word_array[i], prev_word, strlen(word_array[i] + 1)) != 0)){
+			}
+			else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
 				strncpy(prev_word, word_array[i], sizeof(prev_word));
 				printf("%s\n", word_array[i]);	
 			}
@@ -172,7 +173,7 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique)
 			if(!unique){
 				printf("%s\n", word_array[i]);
 			} 
-			else if((strncmp(word_array[i], prev_word, strlen(word_array[i] + 1)) != 0)){
+			else if(strncmp(word_array[i], prev_word, strlen(word_array[i]) + 1) != 0){
 				strncpy(prev_word, word_array[i], sizeof(prev_word));
 				printf("%s\n", word_array[i]);	
 			}
