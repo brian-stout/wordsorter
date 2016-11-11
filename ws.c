@@ -125,17 +125,23 @@ char **file_read(char **word_array, FILE *fp, int *index)
 	
 	printf("I made it here!\n");
 	while(fgets(buf, sizeof(buf), fp)) {
+		//Skips new lines to avoid crashes
 		if(buf[0] == '\n'){
 			continue;
 		}
 		token = strtok(buf, " \n\t");
+		//Preps the word array for an additional pointer
 		word_array = realloc(word_array, (1 + *index) * sizeof(*word_array));
+		//Allocates memory to copy the token into
 		tmp = malloc(strlen(token) + 1);
 		strncpy(tmp, token, strlen(token) + 1);
+		//Assigns the pointer to memory to our array index
 		word_array[*index] = tmp;
 		++*index;
 		while(token != NULL){
 			token = strtok(NULL, " \n\t");
+			//Since the loop is already running and strtok might return a NULL
+			//Checks to seei f there is a null so it doesn't crash on strlen
 			if (token != NULL){
 				word_array = realloc(word_array, (1 + *index) * sizeof(*word_array));
 				tmp = malloc(strlen(token) + 1);
