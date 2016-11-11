@@ -48,23 +48,16 @@ int n_sort(const void *a, const void *b)
 {
 	const char *c = *(const char **)a;
 	const char *d = *(const char **)b;
-	if(isdigit(c[0]) && (isdigit(d[0]) == false)){
-		printf("C has a digit, d does not\n");
-		return -1;
-	} else if ((isdigit(c[0]) == false) && isdigit(d[0])){
-		printf("D has a digit, C does not \n");
-		return 1;
-	} else if (isdigit(c[0]) && isdigit(d[0])){
-		printf("C and D are digits\n");
-		return 0;
-	}
-	return 0;
+	size_t c_length = strlen(c);
+	size_t d_length = strlen(d);
+	
 }
 
 void s_sort(void)
 {
 	printf("Running the s sort function\n");
 }
+
 
 
 
