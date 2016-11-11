@@ -13,7 +13,7 @@ bool argument_checker(int argc, char *argv[]);
 
 char **file_read(char **, FILE *, int *);
 
-void print_words(char **, int, bool);
+void print_words(char **, int, bool, bool);
 
 int main(int argc, char *argv[])
 {
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 	printf("DEBUG: The reverse_print is %d\n", reverse_print);
 	word_array = sort_word_array(word_array, sort_flag, index);
 	printf("%c \n", sort_flag);
-	print_words(word_array, index, reverse_print);
+	print_words(word_array, index, reverse_print, unique_words_only);
 	
 }
 
@@ -151,19 +151,25 @@ char **file_read(char **word_array, FILE *fp, int *index)
 	}
 	return word_array;	
 }
-
-void print_words(char **word_array, int index, bool reverse_print)
+//TODO: Implement bit masks for flags
+void print_words(char **word_array, int index, bool reverse_print, bool unique)
 {	
+	char *prev_word = malloc(sizeof(prev_word));
+	char *tmp;
+	
 	if(!reverse_print) {
 		for(int i = 0; i < index; ++i){
-			printf("%s", word_array[i]);
-			printf(" scrabble: %d \n", scrabble_score(word_array[i]));
+			if(strncmp(word_array[i], prev_word, strlen(word_array[i] + 1) != 0 || !unique){
+				printf("%s\n", word_array[i]);
+				tmp = realloc(prev_word, strlen(word_array[i] + 1);
+				prev_word = tmp;
+				strncpy(prev_word, word_array[i], strnlen(word_array[i] + 1);
+			}
 			free(word_array[i]);
 		}
 	} else {
 		for(int i = index; i > 0; --i){
-			printf("%s", word_array[i - 1]);
-			printf(" scrabble: %d \n", scrabble_score(word_array[i - 1]));
+			printf("%s\n", word_array[i - 1]);
 			free(word_array[i-1]);
 		}
 	}
