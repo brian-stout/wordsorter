@@ -154,23 +154,29 @@ char **file_read(char **word_array, FILE *fp, int *index)
 //TODO: Implement bit masks for flags
 void print_words(char **word_array, int index, bool reverse_print, bool unique)
 {	
-	char *prev_word = malloc(sizeof(prev_word));
-	char *tmp;
-	
+	char prev_word[64];
+
 	if(!reverse_print) {
 		for(int i = 0; i < index; ++i){
-			if(!unique || (strncmp(word_array[i], prev_word, strlen(word_array[i] + 1)) != 0)){
+			if(!unique){
 				printf("%s\n", word_array[i]);
-				tmp = realloc(prev_word, strlen(word_array[i] + 1);
-				prev_word = tmp;
-				strncpy(prev_word, word_array[i], strnlen(word_array[i] + 1);
+			} 
+			else if((strncmp(word_array[i], prev_word, strlen(word_array[i] + 1)) != 0)){
+				strncpy(prev_word, word_array[i], sizeof(prev_word));
+				printf("%s\n", word_array[i]);	
 			}
 			free(word_array[i]);
 		}
 	} else {
 		for(int i = index; i > 0; --i){
-			printf("%s\n", word_array[i - 1]);
-			free(word_array[i-1]);
+			if(!unique){
+				printf("%s\n", word_array[i]);
+			} 
+			else if((strncmp(word_array[i], prev_word, strlen(word_array[i] + 1)) != 0)){
+				strncpy(prev_word, word_array[i], sizeof(prev_word));
+				printf("%s\n", word_array[i]);	
+			}
+			free(word_array[i]);
 		}
 	}
 	
