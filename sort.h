@@ -3,14 +3,34 @@
 #include <string.h>
 #include <ctype.h>
 
+/**	sort_word_array() handles the qsort logic based on the
+*		sort_flag passed into it. Additional sorts can
+*		easily be added.
+*/
 char **sort_word_array(char **, char, int);
 
+
+/**	a_sort() using a basic strcmp to sort files alphabetically
+*		a_sort() is also the default sort
+*/
 int a_sort(const void *, const void *);
 
+
+/**	l_sort() handles the logic to sort by length of word
+*		it sorts by a_sort first to keep things tidy.
+*/
 int l_sort(const void *, const void *);
 
+
+/**	a_sort() using a basic strcmp to sort files alphabetically
+*		a_sort() is also the default sort
+*/
 int n_sort(const void *, const void *);
 
+
+/**	a_sort() using a basic strcmp to sort files alphabetically
+*		a_sort() is also the default sort
+*/
 int s_sort(const void *, const void *);
 
 int scrabble_score(const char s[]);
@@ -25,6 +45,7 @@ char **sort_word_array(char **word_array, char sort_flag, int index)
 			qsort(word_array, index, sizeof(*word_array), a_sort);
 			break;
 		case 'l':
+			qsort(word_array, index, sizeof(*word_array), a_sort);
 			qsort(word_array, index, sizeof(*word_array), l_sort);
 			break;
 		case 'n':
