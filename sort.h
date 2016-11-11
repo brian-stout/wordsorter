@@ -56,21 +56,19 @@ int n_sort(const void *a, const void *b)
 	char const *c = *(const char **)a;
 	char const *d = *(const char **)b;
 
-	char delim[] = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
-
 	char str1[64];
 	char str2[64];
 	if(isdigit(c[0]) && (isdigit(d[0]) == false)){
 		return -1;
-	} else if ((isdigit(c[0]) == false) && isdigit(d[0])){
+	}else if ((isdigit(c[0]) == false) && isdigit(d[0])){
 		return 1;
-	} else if (isdigit(c[0]) && isdigit(d[0])){
+	}else if (isdigit(c[0]) && isdigit(d[0])){
 		strncpy(str1, c, strlen(c)+1);
 		strncpy(str2, d, strlen(c)+1);
 		int first = strtol(c, NULL, 10);
 		int second = strtol(d, NULL, 10);
 		return first - second;
-	} else{
+	}else{
 		return strcmp(c, d);
 	}
 }
@@ -85,7 +83,9 @@ int scrabble_score(const char s[])
 	int score = 0;	
 	size_t end = strlen(s);
 	for(size_t i = 0; i < end; ++i){
-		score += scrabble_chart(s[i]);	
+		if(!isdigit(s[i])){
+			score += scrabble_chart(s[i]);
+		}	
 	}
 	return score;
 }

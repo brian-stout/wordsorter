@@ -23,8 +23,7 @@ int main(int argc, char *argv[])
 
 	int print_limiter = -1;
 	
-	//TODO: The string is unnesscary, just overwite the character each time
-	//Memory for two characters, the default value and a null byte
+
 	char sort_flag = 'a';
 
 	bool unique_words_only = false;
@@ -80,15 +79,12 @@ int main(int argc, char *argv[])
 		printf("DEBUG: User did not input files \n");
 	} else {
 		for(int i = optind; i < argc; ++i) {
-			printf("DEBUG: File to be opened: %s \n", argv[i]);
 			FILE *fp = fopen(argv[i], "r");
 			word_array = file_read(word_array, fp, &index);
 			fclose(fp);
 		}
 	}
-	printf("DEBUG: The reverse_print is %d\n", reverse_print);
 	word_array = sort_word_array(word_array, sort_flag, index);
-	printf("%c \n", sort_flag);
 	print_words(word_array, index, reverse_print, unique_words_only);
 	
 }
