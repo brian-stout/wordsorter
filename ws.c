@@ -23,27 +23,31 @@ int main(int argc, char *argv[])
 		return EX_USAGE;
 	}
 
+	//Set to -1 so when called to function later it is not zero
+	//print_words() does not print word if print_limiter is 0
 	int print_limiter = -1;
 
+	//Default sorting flag
 	char sort_flag = 'a';
 
+	//Flags for print_words later on
 	bool unique_words_only = false;
 	bool reverse_print = false;
 
 	int c;
-
 	while(-1 < (c = getopt(argc, argv, "c:ahlnrsu"))) {
 		char *err;
 
 		switch(c) {
 			case 'c':
-				//strtol value to print_limiter
+				//Grabs the string following c and turns it to a number
 				print_limiter = strtol(optarg, &err, 10);
+				//if strtol fails it's likely because of this error
 				if(*err) {
-					//TODO: print to stderror
 					printf("Error: -c must be followed by a valid number \n");
 					return EX_USAGE;
 				}
+				//avoids weird negative numbers as user input
 				if(print_limiter < 0) {
 					printf("Error: -c can not be followed by a negative number \n");
 					return EX_USAGE;
@@ -51,7 +55,6 @@ int main(int argc, char *argv[])
 				break;
 			case 'u':
 				//Flag for not printing out duplicates
-				//Probably going to be a flag affecting print so needs it's own flag
 				unique_words_only = true;
 				break;
 			case 'r':
@@ -74,11 +77,18 @@ int main(int argc, char *argv[])
 	int index = 0;
 	char **word_array = malloc((1 + index) * sizeof(*word_array));
 
+	//If the user only inputed options then use stdin as a read
 	if(optind == argc) {
 			word_array = input_read(word_array, stdin, &index);
-	} else {
+	}
+	//If the user inputed more arguments than options, treat them as file paths
+	else {
 		for(int i = optind; i < argc; ++i) {
 			FILE *fp = fopen(argv[i], "r");
+			if(!fp) {
+				printf("Error: Could not open %s!\n", argv[i]);
+				return EX_NOINPUT;
+			}
 			word_array = input_read(word_array, fp, &index);
 			fclose(fp);
 		}
