@@ -45,6 +45,10 @@ int main(int argc, char *argv[])
 					printf("Error: -c must be followed by a valid number \n");
 					return EX_USAGE;
 				}
+				if(print_limiter < 0) {
+					printf("Error: -c can not be followed by a negative number \n");
+					return EX_USAGE
+				}
 				break;
 			case 'u':
 				//Flag for not printing out duplicates
@@ -181,7 +185,12 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique, 
 	prev_word[0] = '\0';
 
 	if(!reverse_print) {
-		for(int i = 0; i < (index - print_limiter); ++i){
+
+		if(print_limiter != 0){
+			if(print_limiter > 
+		}
+
+		for(int i = 0; i < loop_count; ++i){
 			if(!unique){
 				printf("%s\n", word_array[i]);
 			}
@@ -192,7 +201,7 @@ void print_words(char **word_array, int index, bool reverse_print, bool unique, 
 			free(word_array[i]);
 		}
 	} else {
-		for(int i = index; i > print_limiter; --i){
+		for(int i = index; i > (index - print_limiter); --i){
 			if(!unique){
 				printf("%s\n", word_array[i]);
 			} 
