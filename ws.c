@@ -26,9 +26,11 @@ bool argument_checker(int argc, char *argv[]);
 char **input_read(char **, FILE *, int *);
 
 
-/**
-*
-*
+/**	print_words() handles the printing logic for the word array
+*		that input_read() creates.  It assumes after you print
+*		you are done with the words (in this program yes)
+*		but a seperate cleanup function should be implemented
+*		later.
 */
 void print_words(char **, int, bool, bool, int);
 
